@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!-- <link href="../static/cover.css" rel="stylesheet"> -->
+
+    <title>Make Me Curly</title>
+</head>
+
+<body>
+    <!-- Page Content -->
+    <div class="text-dark container col-9">
+    <!-- Jumbotron Header -->
+    <header class=" jumbotron my-0 p-4">
+    <h2 class="strong">Make Me Curly<span class="small text-muted">    Demystifying Curly Hair Products</span></h2><hr class="my-4">
+    <p class="lead">
+      {% if predicted_class == 'curly' %}
+	 Your hair is <b><span class='results'>curly!</span></b>
+		
+      {% elif predicted_class == 'wavy' %}
+	Your hair is <b><span class="results">wavy!</span></b>
+		
+      {% elif predicted_class == 'straight' %}
+	Your hair is <b><span class="results">straight!</span></b>
+	
+      {% elif predicted_class == 'quite curly' %} 
+        Your hair is <b><span class="results">quite curly!</span></b>
+
+      {% elif predicted_class == 'dreadlocks' %} 
+        Your hair is <b><span class="results">in dreads!</span></b>
+
+      {% elif predicted_class == 'braids' %} 
+        Your hair is <b><span class="results">braided!</span></b>
+
+      {% elif predicted_class == 'unsure' %} 
+        Sorry, we've having trouble classifying your hair.
+
+      {% elif predicted_class == 'nonhair' %} 
+	Sorry, this doesn't look like a picture of hair.
+		
+      {% endif %}
+
+    </p>
+    </header>
+
+    <div id="main">
+    <align=center>
+    <div style="height:12px;"></div>
+
+     {% if  predicted_class == 'straight' %}
+	
+	<b>Sorry!</b></br>
+	Your hair is beautiful, but this tool can only help you if you
+	have curly hair.</br>
+	If your hair is not straight, try a picture with a different
+	angle or lighting.</br>
+	
+      {% elif  predicted_class == 'braids' %}
+	
+	<b>Sorry!</b></br>
+	Your hair should be unbraided for this tool.</br>
+	If your hair is not braided, try a picture with a different
+	angle or lighting.</br>
+
+      {% elif  predicted_class == 'dreadlocks' %}
+	
+	<b>Sorry!</b></br>
+	Your hair looks great, but this tool can only help if your
+	hair is not in dreads.</br>
+	If your hair is not braided, try a picture with a different
+	angle or lighting.</br>
+	
+      {% elif  predicted_class == 'unsure' %}
+	
+	Try a picture with a different angle or lighting.</br>
+
+      {% elif  predicted_class == 'nonhair' %}
+
+	If this is a picture of your hair, try a picture with a different angle or lighting.</br>
+	
+      {% else %}
+	
+	<b>According to the curly people of Reddit who have hair like yours, you should start
+	with these products: </b></br>
+
+      <div style="height:6px;"></div>
+	
+        <b> Shampoo:</b> {{ shampoo }} <a href=" {{ ushampoo }} " target="_blank" >(link)</a></br>
+        <b> Conditioner: </b> {{ conditioner }} <a href=" {{ uconditioner }} " target="_blank" >(link)</a></br>
+        <b> Leave-In: </b> {{ leavein  }} <a href=" {{ leavein }} " target="_blank" >(link)</a></br>
+        <b> Gel: </b> {{ gel }} <a href=" {{ ugel }} " target="_blank" >(link)</a></br>
+	
+      <div style="height:6px;"></div>
+	
+        <b>If you feel like your curls are a little limp or dry, try a
+        one-time treatment such as:</br></b>
+      
+      <div style="height:6px;"></div>
+      
+        <b> Protein: </b> {{ protein }} <a href=" {{ uprotein }} " target="_blank" >(link)</a></br>
+        <b> Deep Treatement: </b> {{ deep }} <a href=" {{ udeep }} " target="_blank" >(link)</a> </br>	
+
+      {% endif %}
+      <div style="height:10px;"></div>
+      <a href="{{ url_for('upload_file') }}">Try another
+      photo!</a><br>
+      </align=center></div>
+</body>
+</html>
