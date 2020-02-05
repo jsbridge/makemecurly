@@ -2,3 +2,4 @@
 .DS_Store 
 *.pyc
 __pycache__
+model_saved_VGG_6cat.h5
