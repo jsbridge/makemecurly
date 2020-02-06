@@ -3,11 +3,20 @@ import warnings
 warnings.filterwarnings("ignore")
 
 import os
-from keras.preprocessing.image import image 
+import glob
 import numpy as np
+import cv2
+#import hairanalysis
+#import importlib
+#importlib.reload(hairanalysis)
+
+import keras
+from keras.preprocessing.image import image 
 from tensorflow.keras.applications import VGG16
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Conv2D, MaxPooling2D, Activation, Dropout, Flatten, Dense
+from tensorflow.keras.layers import Conv2D, MaxPooling2D
+from tensorflow.keras.layers import Activation, Dropout
+from tensorflow.keras.layers import Flatten, Dense
 from tensorflow.keras import backend as K
 
 
@@ -63,8 +72,13 @@ def predict_class(uploaded_img):
  
     # Then apply the classifier for type of hair
     img_width, img_height = 400, 400
-    nb_classes = 6
+    nb_classes = 5
 
+    # Mask the uploaded image to just hair
+    #im = cv2.imread(uploaded_img)
+    #mask = hairanalysis.predict_mask(im)
+    #dst = hairanalysis.transfer_mask(im, mask)
+    
     img = image.load_img(uploaded_img, target_size = (img_width, img_height))
     img_arr = image.img_to_array(img)
     img_arr = np.expand_dims(img_arr, axis=0)
@@ -87,7 +101,7 @@ def predict_class(uploaded_img):
     model.add(Dense(512*4, activation='relu'))
     model.add(Dense(nb_classes, activation='softmax'))
 
-    model.load_weights('model_saved_VGG_6cat.h5')
+    model.load_weights('model_saved_VGG_5cat.h5')
 
     model.compile(loss='categorical_crossentropy',
               optimizer='rmsprop',
@@ -102,6 +116,7 @@ def predict_class(uploaded_img):
     if pred[0][index_predict] <= 0.5:
         return "unsure"
 
-    dict_labels = {0:'braids', 1:'curly', 2:'dreadlocks',3: 'quite curly', 4:'straight', 5:'wavy'}  
+    dict_labels = {0:'curly', 1: 'quite curly', 2:'short', 3:'straight', 4:'wavy'}  
     
     return dict_labels[index_predict]
+

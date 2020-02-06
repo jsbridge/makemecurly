@@ -42,6 +42,9 @@
       {% elif predicted_class == 'unsure' %} 
         Sorry, we've having trouble classifying your hair.
 
+      {% elif predicted_class == 'short' %} 
+        Sorry, it looks like your hair is too short for this tool.
+
       {% elif predicted_class == 'nonhair' %} 
 	Sorry, this doesn't look like a picture of hair.
 		
@@ -60,6 +63,11 @@
 	Your hair is beautiful, but this tool can only help you if you
 	have curly hair.</br>
 	If your hair is not straight, try a picture with a different
+        angle or lighting.</br>
+
+      {% elif  predicted_class == 'short' %}
+	
+	If your hair is not short, try a picture with a different
 	angle or lighting.</br>
 	
       {% elif  predicted_class == 'braids' %}
@@ -90,19 +98,19 @@
 	<b>According to the curly people of Reddit who have hair like yours, you should start
 	with these products: </b></br>
 
-      <div style="height:6px;"></div>
+        <div style="height:6px;"></div>
 	
         <b> Shampoo:</b> {{ shampoo }} <a href=" {{ ushampoo }} " target="_blank" >(link)</a></br>
         <b> Conditioner: </b> {{ conditioner }} <a href=" {{ uconditioner }} " target="_blank" >(link)</a></br>
         <b> Leave-In: </b> {{ leavein  }} <a href=" {{ leavein }} " target="_blank" >(link)</a></br>
         <b> Gel: </b> {{ gel }} <a href=" {{ ugel }} " target="_blank" >(link)</a></br>
 	
-      <div style="height:6px;"></div>
+        <div style="height:6px;"></div>
 	
         <b>If you feel like your curls are a little limp or dry, try a
         one-time treatment such as:</br></b>
       
-      <div style="height:6px;"></div>
+        <div style="height:6px;"></div>
       
         <b> Protein: </b> {{ protein }} <a href=" {{ uprotein }} " target="_blank" >(link)</a></br>
         <b> Deep Treatement: </b> {{ deep }} <a href=" {{ udeep }} " target="_blank" >(link)</a> </br>	

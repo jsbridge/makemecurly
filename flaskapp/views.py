@@ -37,12 +37,13 @@ def upload_file():
         # If everything looks good, proceed
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(filepath)
 
-            predicted_class = predict_class(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            predicted_class = predict_class(filepath)
 
             # List of classes not used in this app
-            bad_list = ['straight', 'unsure','braids','dreadlocks','nonhair']
+            bad_list = ['straight', 'unsure','braids','dreadlocks','nonhair', 'short']
             if predicted_class in bad_list:
                 return render_template('complete.html', predicted_class = predicted_class)
 
