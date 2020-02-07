@@ -5,7 +5,7 @@ warnings.filterwarnings("ignore")
 import os
 import glob
 import numpy as np
-import cv2
+#import cv2
 #import hairanalysis
 #import importlib
 #importlib.reload(hairanalysis)
@@ -65,14 +65,14 @@ def predict_class(uploaded_img):
     pred = model.predict(img_arr)
 
     K.clear_session()
-
+    print(pred[0])
     dict_labels = {0: 'hair', 1:'nonhair'}
     if pred[0] > 0.5:
         return 'nonhair'
  
     # Then apply the classifier for type of hair
     img_width, img_height = 400, 400
-    nb_classes = 5
+    nb_classes = 4
 
     # Mask the uploaded image to just hair
     #im = cv2.imread(uploaded_img)
@@ -101,7 +101,7 @@ def predict_class(uploaded_img):
     model.add(Dense(512*4, activation='relu'))
     model.add(Dense(nb_classes, activation='softmax'))
 
-    model.load_weights('model_saved_VGG_5cat.h5')
+    model.load_weights('model_saved_VGG_4cat.h5')
 
     model.compile(loss='categorical_crossentropy',
               optimizer='rmsprop',
