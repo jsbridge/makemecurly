@@ -15,30 +15,30 @@ When the user uploads an image, it is run through a binary classification convol
 
 The nonhair training data come from the [Caltech 101](http://www.vision.caltech.edu/Image_Datasets/Caltech101/) dataset with the human face categories removed. The hair training data come from the [Figaro1k](http://projects.i-ctm.eu/it/progetto/figaro-1k) hair dataset. 
 
-!(https://github.com/jsbridge/random_images/blob/master/Motorbikes_image_0022.jpg)!(https://github.com/jsbridge/random_images/blob/master/ibis_image_0051.jpg)!(https://github.com/jsbridge/random_images/blob/master/laptop_image_0027.jpg)!(https://github.com/jsbridge/random_images/blob/master/mandolin_image_0026.jpg)
+![motorcycle](https://github.com/jsbridge/random_images/blob/master/Motorbikes_image_0022.jpg)![ibis](https://github.com/jsbridge/random_images/blob/master/ibis_image_0051.jpg)![laptop](https://github.com/jsbridge/random_images/blob/master/laptop_image_0027.jpg)![mandolin](https://github.com/jsbridge/random_images/blob/master/mandolin_image_0026.jpg)
 
 If the model determines that the picture includes hair, another neural network classifies how curly the hair is in the image, whether it’s very curly, wavy and so on. A PostgreSQL database is then queried for products that are good for that hair type.
 
-## The PostgreSQL database is populated with data from [Reddit](http://www.reddit.com/r/curlyhair)
-I scraped over 9,000 images from the curly hair subreddit on Reddit using the Pushshift API. Each of these images is accompanies by a comment from the uploader describing their hair routine and listing the products and product types that they use (this is a rule of the subreddit - if you don't post you're routine, a bot complains!)
+## The PostgreSQL database is populated with data from Reddit
+I scraped over 9,000 images from the [curly hair subreddit](http://www.reddit.com/r/curlyhair) on Reddit using the Pushshift API. Each of these images is accompanies by a comment from the uploader describing their hair routine and listing the products and product types that they use (this is a rule of the subreddit - if you don't post you're routine, a bot complains!)
 
 ## The classfication neural network
 I used a pre-trained [VGG16 model](https://neurohive.io/en/popular-networks/vgg16/) with the bottom layers frozen and added two fully connected layers at the end to train a model that classifies each image from Reddit into the hair categories. Between the two fully connected layers is a dropout layer to reduce overfitting, and final layer uses a softmax activation function. The model is trained using the labeled Figaro1k image set, and the input images are masked to block out the background and other things that may bias the results, such as skin color.
-!(https://github.com/jsbridge/random_images/blob/master/masks.jpg)
+![masks](https://github.com/jsbridge/random_images/blob/master/masks.jpg)
 
 The accuracy of the model is almost 80% on the test set of images, with good loss, precision, recall, adn f1 scores as well.
-!(https://github.com/jsbridge/random_images/blob/master/VGG_loss_acc.png)
-!(https://github.com/jsbridge/random_images/blob/master/VGG_prec_recall_f1.png)
+![acc](https://github.com/jsbridge/random_images/blob/master/VGG_loss_acc.png)
+![recall](https://github.com/jsbridge/random_images/blob/master/VGG_prec_recall_f1.png)
 
 ## Natural language processing with Reddit comments
 With the Reddit images classified, I performed natural language processing on the Reddit comments describing the uploader’s routine and products. Here is an example of a comment:
-!(https://github.com/jsbridge/random_images/blob/master/Screen%20Shot%202020-02-07%20at%2011.37.04%20AM.png)
+![comment](https://github.com/jsbridge/random_images/blob/master/Screen%20Shot%202020-02-07%20at%2011.37.04%20AM.png)
 
 To parse the comments, I used a master list of popular curly hair products, and searched for product names and types in each comment. However, this is not as simple as it sounds, as people do not alway write out full product names, and sometimes misspell them. 
-!(https://github.com/jsbridge/random_images/blob/master/Screen%20Shot%202020-02-07%20at%202.39.59%20PM.png)
+![products](https://github.com/jsbridge/random_images/blob/master/Screen%20Shot%202020-02-07%20at%202.39.59%20PM.png)
 
 To address this issue, I searched for unique parts of product names, such as “curl and shine," that people are likely to type out, as they are the identifying feature of the product. From there, I searched for product types, such as "styling milk," in the vicinity of the unique phrase. In this way, I was able to reduce each comment to it’s component products.
-!(https://github.com/jsbridge/random_images/blob/master/Screen%20Shot%202020-02-07%20at%202.40.11%20PM.png)
+![better](https://github.com/jsbridge/random_images/blob/master/Screen%20Shot%202020-02-07%20at%202.40.11%20PM.png)
 
 These products were put into the SQL database, and the most popular products are returned to the user when their hair type is identified.
  
