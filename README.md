@@ -15,7 +15,7 @@ When the user uploads an image, it is run through a binary classification convol
 
 The nonhair training data come from the [Caltech 101](http://www.vision.caltech.edu/Image_Datasets/Caltech101/) dataset with the human face categories removed. The hair training data come from the [Figaro1k](http://projects.i-ctm.eu/it/progetto/figaro-1k) hair dataset. 
 
-![motorcycle](https://github.com/jsbridge/random_images/blob/master/Motorbikes_image_0022.jpg)![ibis](https://github.com/jsbridge/random_images/blob/master/ibis_image_0051.jpg)![laptop](https://github.com/jsbridge/random_images/blob/master/laptop_image_0027.jpg)![mandolin](https://github.com/jsbridge/random_images/blob/master/mandolin_image_0026.jpg)
+![ibis](https://github.com/jsbridge/random_images/blob/master/ibis_image_0051.jpg)![motorcycle](https://github.com/jsbridge/random_images/blob/master/Motorbikes_image_0022.jpg)![mandolin](https://github.com/jsbridge/random_images/blob/master/mandolin_image_0026.jpg)
 
 If the model determines that the picture includes hair, another neural network classifies how curly the hair is in the image, whether it’s very curly, wavy and so on. A PostgreSQL database is then queried for products that are good for that hair type.
 
