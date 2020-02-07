@@ -26,7 +26,7 @@ I scraped over 9,000 images from the [curly hair subreddit](http://www.reddit.co
 I used a pre-trained [VGG16 model](https://neurohive.io/en/popular-networks/vgg16/) with the bottom layers frozen and added two fully connected layers at the end to train a model that classifies each image from Reddit into the hair categories. Between the two fully connected layers is a dropout layer to reduce overfitting, and final layer uses a softmax activation function. The model is trained using the labeled Figaro1k image set, and the input images are masked to block out the background and other things that may bias the results, such as skin color. The classes are straight, wavy, curly, and quite curly.
 ![masks](https://github.com/jsbridge/random_images/blob/master/masks.jpg)
 
-The accuracy of the model is almost 80% on the test set of images, with good loss, precision, recall, adn f1 scores as well.
+The accuracy of the model is almost 80% on the test set of images, with good loss, precision, recall, and f1 scores as well.
 ![acc](https://github.com/jsbridge/random_images/blob/master/VGG_loss_acc.png)
 ![recall](https://github.com/jsbridge/random_images/blob/master/VGG_prec_recall_f1.png)
 The output model can be accessed [here](https://www.dropbox.com/s/u4zs7f2mdv5xg9f/model_saved_VGG_4cat.h5?dl=0).
