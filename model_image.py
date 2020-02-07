@@ -116,7 +116,7 @@ def predict_class(uploaded_img):
     if pred[0][index_predict] <= 0.5:
         return "unsure"
 
-    dict_labels = {0:'curly', 1: 'quite curly', 2:'short', 3:'straight', 4:'wavy'}  
+    dict_labels = {0:'curly', 1: 'quite curly', 2:'straight', 3:'wavy'}  
     
     return dict_labels[index_predict]
 
