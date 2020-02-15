@@ -15,7 +15,7 @@ def query(predicted_class):
     con = None
     con = psycopg2.connect(database = db_name, user = username, host='localhost')
 
-    # Query the product database for the given class
+    # Query the product database for products for the given class
     sql_query =""" 
     SELECT products_used FROM curly_hair_table WHERE class='%s'; 
     """   % predicted_class
@@ -41,11 +41,9 @@ def query(predicted_class):
     full_list = [f.replace('sheamoisture', 'shea moisture') for f in full_list]
 
     full_list_tup = []
-    full_list_notup = []
     for i in range(0,len(full_list),2):
         try:
             full_list_tup.append((full_list[i], full_list[i+1]))
-            full_list_notup.append(full_list[i])
         except IndexError:
             continue
 
@@ -53,11 +51,12 @@ def query(predicted_class):
     df = pd.DataFrame(full_list_tup, columns=['product', 'type'])
     df.groupby('type')['product'].apply(lambda x: x.mode().iat[0])
 
-    types = ['shampoo', 'conditioner', 'leave in', 'gel', 'deep treatment', 'clarifying shampoo','protein']
+    types = ['shampoo', 'conditioner', 'leave in', 'gel', 'deep treatment',
+             'protein', 'cream', 'serum','clarifying shampoo']
     prods=[]
     for t in types:
         prod = (df.groupby('type')['product'].apply(lambda x: x.mode().iat[0]))[t]
-        prod = " ".join(w.capitalize() for w in prod.split(' '))
+        prod = " ".join(p.capitalize() for p in prod.split(' '))
         if 'La' in prod:
            prod = prod.replace('La ', 'LA ')
         prods.append(prod)

@@ -6,9 +6,7 @@ from model_image import *
 from query import *
 import os
 
-
 upload_folder = 'flaskapp/static/uploads'
-
 app.config['UPLOAD_FOLDER'] = upload_folder
 
 allowed_ext = set(['png', 'jpg', 'jpeg', 'gif'])
@@ -50,15 +48,16 @@ def upload_file():
             # Query the product database, return products and amazon URLS for products
             prods, urls = query(predicted_class)
 
-            shampoo, conditioner, leavein,gel,deep,protein,clarify = prods
-            ushampoo, uconditioner, uleavein,ugel,udeep,uprotein,uclarify = urls
+            shampoo,conditioner,leavein,gel,deep,protein,cream,serum,clarify = prods
+            ushampoo,uconditioner,uleavein,ugel,udeep,uprotein,ucream,userum,uclarify = urls
 	
             return render_template('complete.html', predicted_class = predicted_class,
-                                    shampoo = shampoo, conditioner=conditioner,
-                                    leavein=leavein,gel=gel, deep=deep,protein=protein,
-                                    clarify=clarify, ushampoo = ushampoo, uconditioner=uconditioner,
-                                    uleavein=uleavein,ugel=ugel, udeep=udeep,uprotein=uprotein,
-                                    uclarify=uclarify)
+                                    shampoo = shampoo, conditioner = conditioner,
+                                    leavein = leavein, gel = gel, deep = deep, protein = protein,
+                                    cream = cream, serum = serum, clarify = clarify, ushampoo = ushampoo,
+                                    uconditioner = uconditioner, uleavein = uleavein,ugel = ugel,
+                                    udeep = udeep, ucream = ucream, userum = userum, uprotein = uprotein,
+                                    uclarify = uclarify)
         
             return redirect(url_for('main'))
 

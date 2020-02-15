@@ -33,17 +33,8 @@
       {% elif predicted_class == 'quite curly' %} 
         Your hair is <b><span class="results">quite curly!</span></b>
 
-      {% elif predicted_class == 'dreadlocks' %} 
-        Your hair is <b><span class="results">in dreads!</span></b>
-
-      {% elif predicted_class == 'braids' %} 
-        Your hair is <b><span class="results">braided!</span></b>
-
       {% elif predicted_class == 'unsure' %} 
         Sorry, we've having trouble classifying your hair.
-
-      {% elif predicted_class == 'short' %} 
-        Sorry, it looks like your hair is too short for this tool.
 
       {% elif predicted_class == 'nonhair' %} 
 	Sorry, this doesn't look like a picture of hair.
@@ -64,26 +55,6 @@
 	have curly hair.</br>
 	If your hair is not straight, try a picture with a different
         angle or lighting.</br>
-
-      {% elif  predicted_class == 'short' %}
-	
-	If your hair is not short, try a picture with a different
-	angle or lighting.</br>
-	
-      {% elif  predicted_class == 'braids' %}
-	
-	<b>Sorry!</b></br>
-	Your hair should be unbraided for this tool.</br>
-	If your hair is not braided, try a picture with a different
-	angle or lighting.</br>
-
-      {% elif  predicted_class == 'dreadlocks' %}
-	
-	<b>Sorry!</b></br>
-	Your hair looks great, but this tool can only help if your
-	hair is not in dreads.</br>
-	If your hair is not braided, try a picture with a different
-	angle or lighting.</br>
 	
       {% elif  predicted_class == 'unsure' %}
 	
@@ -102,8 +73,17 @@
 	
         <b> Shampoo:</b> {{ shampoo }} <a href=" {{ ushampoo }} " target="_blank" >(link)</a></br>
         <b> Conditioner: </b> {{ conditioner }} <a href=" {{ uconditioner }} " target="_blank" >(link)</a></br>
-        <b> Leave-In: </b> {{ leavein  }} <a href=" {{ leavein }} " target="_blank" >(link)</a></br>
-        <b> Gel: </b> {{ gel }} <a href=" {{ ugel }} " target="_blank" >(link)</a></br>
+        <b> Leave-In: </b> {{ leavein  }} <a href=" {{ uleavein }} "target="_blank" >(link)</a></br>
+
+	<div style="height:6px;"></div>
+	
+	<b>Give these styling products a try:</b></br>
+
+	<div style="height:6px;"></div>
+	
+        <b> Gel: </b> {{ gel }} <a href=" {{ ugel }} " target="_blank">(link)</a></br>
+	<b> Serum: </b> {{ serum }} <a href=" {{ userum }} " target="_blank">(link)</a></br>
+	<b> Cream: </b> {{ cream }} <a href=" {{ ucream }} " target="_blank">(link)</a></br>
 	
         <div style="height:6px;"></div>
 	
@@ -113,7 +93,8 @@
         <div style="height:6px;"></div>
       
         <b> Protein: </b> {{ protein }} <a href=" {{ uprotein }} " target="_blank" >(link)</a></br>
-        <b> Deep Treatement: </b> {{ deep }} <a href=" {{ udeep }} " target="_blank" >(link)</a> </br>	
+        <b> Deep Treatement: </b> {{ deep }} <a href=" {{ udeep }} " target="_blank" >(link)</a> </br>
+	<b> Clarifying Shampoo: </b> {{ clarify }} <a href=" {{ uclarify }} " target="_blank" >(link)</a> </br>
 
       {% endif %}
       <div style="height:10px;"></div>
