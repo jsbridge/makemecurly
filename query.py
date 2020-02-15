@@ -52,7 +52,7 @@ def query(predicted_class):
     df.groupby('type')['product'].apply(lambda x: x.mode().iat[0])
 
     types = ['shampoo', 'conditioner', 'leave in', 'gel', 'deep treatment',
-             'protein', 'cream', 'serum','clarifying shampoo']
+             'protein', 'cream', 'serum', 'clarifying shampoo']
     prods=[]
     for t in types:
         prod = (df.groupby('type')['product'].apply(lambda x: x.mode().iat[0]))[t]
