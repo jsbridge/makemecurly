@@ -50,7 +50,8 @@ def upload_file():
 
             shampoo,conditioner,leavein,gel,deep,protein,cream,serum,clarify = prods
             ushampoo,uconditioner,uleavein,ugel,udeep,uprotein,ucream,userum,uclarify = urls
-	
+
+            # Passes hair class, products, and URLS to the second HTML page
             return render_template('complete.html', predicted_class = predicted_class,
                                     shampoo = shampoo, conditioner = conditioner,
                                     leavein = leavein, gel = gel, deep = deep, protein = protein,
