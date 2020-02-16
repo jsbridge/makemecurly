@@ -2,14 +2,7 @@
 import warnings
 warnings.filterwarnings("ignore")
 
-import os
-import glob
 import numpy as np
-#import cv2
-#import hairanalysis
-#import importlib
-#importlib.reload(hairanalysis)
-
 import keras
 from keras.preprocessing.image import image 
 from tensorflow.keras.applications import VGG16
@@ -24,6 +17,7 @@ def predict_class(uploaded_img):
     warnings.filterwarnings("ignore")
 
     # First apply the binary classification for hair/not hair
+    # N.B. image shape is is specified so all input images can be given the same size
     img_width, img_height = 200,200
 
     img = image.load_img(uploaded_img, target_size = (img_width, img_height))
@@ -56,6 +50,7 @@ def predict_class(uploaded_img):
     model.add(Dense(1))
     model.add(Activation('sigmoid'))
 
+    # Binary model trained on augmented CIFAR-10 images and Figaro1k hair dataset
     model.load_weights('model_binary_saved_sigmoid.h5')
 
     model.compile(loss='binary_crossentropy',
@@ -73,11 +68,6 @@ def predict_class(uploaded_img):
     # Then apply the classifier for type of hair
     img_width, img_height = 400, 400
     nb_classes = 4
-
-    # Mask the uploaded image to just hair
-    #im = cv2.imread(uploaded_img)
-    #mask = hairanalysis.predict_mask(im)
-    #dst = hairanalysis.transfer_mask(im, mask)
     
     img = image.load_img(uploaded_img, target_size = (img_width, img_height))
     img_arr = image.img_to_array(img)
@@ -101,6 +91,8 @@ def predict_class(uploaded_img):
     model.add(Dense(512*4, activation='relu'))
     model.add(Dense(nb_classes, activation='softmax'))
 
+    # VGG16 pretrained model with 2 fully connected layers added
+    # Trained on Figaro1k images
     model.load_weights('model_saved_VGG_4cat.h5')
 
     model.compile(loss='categorical_crossentropy',
@@ -113,6 +105,7 @@ def predict_class(uploaded_img):
     
     index_predict = np.argmax(pred[0])
 
+    # If not category has probability >50%, returns unsure
     if pred[0][index_predict] <= 0.5:
         return "unsure"
 
