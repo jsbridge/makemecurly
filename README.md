@@ -1,6 +1,6 @@
 # Make Me Curly
 
-Trying to find the best curly girl friendly prodcuts for your hair can be time consuming and expensive! This app helps you find the best products for your hair based on thousands of Reddit users' experiences. 
+Trying to find the best curly girl friendly products for your hair can be time-consuming and expensive! This app helps you find the best products for your hair based on thousands of Reddit users' experiences. 
 
 ## Motivation: Why curly hair products?
 The curly hair product industry has really exploded over the last 10 to 15 years. Thousands of new products have appeared on the market,  and helping people take care of their curly hair has become a multi-million dollar industry. However, for those of us with curly hair, the choosing the right products for our hair type is very time-consuming, and the costs can really add up!
