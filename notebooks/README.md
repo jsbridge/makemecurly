@@ -1,1 +1,1 @@
-The code in these notebooks showcases much of the behind the scenes work that went into Make Me Curly
+The code in these notebooks showcases much of the behind the scenes work that went into Make Me Curly. This includes training the binary and categorical cNNs that are used (both by creating a network from scratch, as a baseline, and using the pre-trained VGG16 model.) Additionally, I explore various methods of NLP to extract the product names and types from the Reddit comments.
